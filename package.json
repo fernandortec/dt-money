@@ -12,10 +12,10 @@
 		"@phosphor-icons/react": "^2.0.15",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
-		"styled-components": "^6.1.8",
-		"vite-tsconfig-paths": "^4.3.2"
+		"styled-components": "^6.1.8"
 	},
 	"devDependencies": {
+		"@types/node": "^20.11.30",
 		"@types/react": "^18.2.64",
 		"@types/react-dom": "^18.2.21",
 		"@types/styled-components": "^5.1.34",
