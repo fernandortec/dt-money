@@ -1,4 +1,5 @@
-import { TransactionContext } from "@/contexts/transactionsContext";
+import { TransactionContext } from "@/contexts/transactions-context";
+import { priceFormatter } from "@/helpers/formatter";
 import {
 	ArrowCircleDown,
 	ArrowCircleUp,
@@ -6,7 +7,6 @@ import {
 } from "@phosphor-icons/react";
 import { useContext } from "react";
 import * as S from "./styles";
-import { priceFormatter } from "@/helpers/formatter";
 
 export function Summary() {
 	const { transactions } = useContext(TransactionContext);

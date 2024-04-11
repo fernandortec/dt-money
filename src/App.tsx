@@ -1,4 +1,4 @@
-import { TransactionsProvider } from "@/contexts/transactionsContext";
+import { TransactionsProvider } from "@/contexts/transactions-context";
 import { Transactions } from "@/pages/transactions";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "./styles/global";
