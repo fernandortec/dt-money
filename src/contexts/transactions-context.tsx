@@ -1,3 +1,4 @@
+import { api } from "@/lib/axios";
 import {
 	type JSX,
 	type ReactNode,
@@ -17,10 +18,12 @@ export interface Transaction {
 
 interface TransactionContextType {
 	transactions: Transaction[];
+	fetchTransactions: (q: string) => Promise<void>;
 }
 
 export const TransactionContext = createContext<TransactionContextType>({
 	transactions: [],
+	fetchTransactions: async (_q: string) => {},
 });
 
 export function TransactionsProvider({
@@ -28,19 +31,18 @@ export function TransactionsProvider({
 }: { children: ReactNode }): JSX.Element {
 	const [transactions, setTransactions] = useState<Transaction[]>([]);
 
-	async function loadTransactions(): Promise<void> {
-		const response = await fetch("http://localhost:3333/transactions");
-		const data = await response.json();
+	async function fetchTransactions(query?: string): Promise<void> {
+		const response = await api.get("/transactions", { params: { q: query } });
 
-		setTransactions(data);
+		setTransactions(response.data);
 	}
 
 	useEffect(() => {
-		loadTransactions();
+		fetchTransactions();
 	}, []);
 
 	return (
-		<TransactionContext.Provider value={{ transactions }}>
+		<TransactionContext.Provider value={{ transactions, fetchTransactions }}>
 			{children}
 		</TransactionContext.Provider>
 	);
