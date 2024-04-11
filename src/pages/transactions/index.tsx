@@ -2,6 +2,7 @@ import { Header } from "@/components/header";
 import { Summary } from "@/components/summary";
 
 import { TransactionContext } from "@/contexts/transactionsContext";
+import { priceFormatter } from "@/helpers/formatter";
 import { SearchForm } from "@/pages/transactions/components/SearchForm";
 import { useContext } from "react";
 import * as S from "./styles";
@@ -23,7 +24,8 @@ export function Transactions(): JSX.Element {
 								<td width="50%">{transaction.description}</td>
 								<td>
 									<S.PriceHighlight variant={transaction.type}>
-										{transaction.price}
+										{transaction.type === "outcome" && "-"}
+										{priceFormatter.format(transaction.price)}
 									</S.PriceHighlight>
 								</td>
 								<td>{transaction.category}</td>
