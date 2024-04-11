@@ -1,33 +1,13 @@
 import { Header } from "@/components/header";
 import { Summary } from "@/components/summary";
 
+import { TransactionContext } from "@/contexts/transactionsContext";
 import { SearchForm } from "@/pages/transactions/components/SearchForm";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useContext } from "react";
 import * as S from "./styles";
 
-interface Transaction {
-	id: number;
-	description: string;
-	type: "income" | "outcome";
-	category: string;
-	price: number;
-	createdAt: Date;
-}
-
-export function Transactions() {
-	const [transactions, setTransactions] = useState<Transaction[]>([]);
-
-	async function loadTransactions() {
-		const response = await fetch("http://localhost:3333/transactions");
-		const data = await response.json();
-
-		setTransactions(data);
-	}
-
-	useEffect(() => {
-		loadTransactions();
-	}, []);
+export function Transactions(): JSX.Element {
+	const { transactions } = useContext(TransactionContext);
 
 	return (
 		<main>
@@ -47,7 +27,7 @@ export function Transactions() {
 									</S.PriceHighlight>
 								</td>
 								<td>{transaction.category}</td>
-								<td>{transaction.createdAt}</td>
+								<td>{String(transaction.createdAt)}</td>
 							</tr>
 						))}
 					</tbody>
